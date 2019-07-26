@@ -25,7 +25,7 @@ Feature|Type|Description
 ## Conclusion and Recommendations
 
 - Our multinomial naive Bayes classifier performed well with a test accuracy score of 98.73%. This is within expectations because the topics of our two chosen subreddits differ significantly.
-- [Subreddit Classifier](https://obscure-depths-90491.herokuapp.com/) - A proof of concept web application was developed to demonstrate potential use case. Users can submit their draft post in the application to determine which of the two subreddits should the post be submitted to.
+- [Subreddit Classifier](https://subreddit-classifier.herokuapp.com/) - A proof of concept web application was developed to demonstrate potential use case. Users can submit their draft post in the application to determine which of the two subreddits should the post be submitted to.
 - Scope for future improvements:
     - Optimize stop words and explore strategies for stemming and lemmatization
     - Try ensemble models, such as random forest classifier
