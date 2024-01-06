@@ -8,27 +8,37 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         
-        <link rel="icon" type="image/png" href="/static/images/favicon.png">
-        <title>Facebook or Twitter?</title>
+        <link rel="icon" type="image/png" href="https://img.icons8.com/doodle/80/000000/reddit.png">
+        <title>Subreddit Classifier</title>
     </head>
     <body class="bg-light">
         <div class="container">
             <div class="my-5 text-center">
-                <img class="d-inline mx-auto mb-4" src="/static/images/facebook.png" alt="" width="72" height="72">
-                <img class="d-inline mx-auto mb-4" src="/static/images/twitter.png" alt="" width="72" height="72">
-                <h2>Facebook or Twitter?</h2>
-                <p class="lead">Predicting where a post comes from.</p>
+                <a href="https://icons8.com/icon/80596/reddit">
+                    <img class="d-block mx-auto mb-4" src="https://img.icons8.com/doodle/96/000000/reddit.png" alt="Reddit icon by Icons8" title="Reddit icon by Icons8" width="72" height="72">
+                </a>
+                <h2>Which subreddit?</h2>
+                <p class="lead">Post on /r/personalfinance or /r/relationship_advice?</p>
             </div>
             <div class="col-md-8 offset-md-2">
                 <form action="/" method="POST">
                     <div class="form-group">
-                        <textarea class="form-control" name="postText" rows="3" placeholder="Post text" required>{% if output %}{{ postText }}{% endif %}</textarea>
+                        <input type="text" class="form-control" name="postTitle" placeholder="Title" {% if output %} value="{{ postTitle }}" {% endif %} required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="postText" rows="3" placeholder="Text (optional)">{% if output %}{{ postText }}{% endif %}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 </form>
                 {% if output %}
                 <p><div class="card card-body">
-                    <h5>Post comes from {{ output }}</h5>
+                    <h5>Post to <a href="https://www.reddit.com{{ output }}">{{ output }}</a></h5>
+                    {% for key, value in proba.items() %}
+                    {{ key }}
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ value }}%;" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="100">{{ value }}%</div>
+                    </div>
+                    {% endfor %}
                 </div></p>
                 {% endif %}
             </div>
